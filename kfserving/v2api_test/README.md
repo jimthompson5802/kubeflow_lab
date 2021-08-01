@@ -1,5 +1,6 @@
 # Test Results for serving.kubeflow.org/v1beta1 with endpoint protocol v2
 
+```
 (base) jovyan@first-notebook-0:~/kubeflow_lab/kfserving/v2api_test$ ./curl_rest_api.sh; echo
 + MODEL_SERVICE_NAME=sklearn-irisv2
 ++ kubectl get svc -l serving.kubeflow.org/inferenceservice=sklearn-irisv2,networking.internal.knative.dev/serviceType=Private -o 'jsonpath={.items[0].spec.clusterIP}'
@@ -30,3 +31,4 @@
 < 
 * Connection #0 to host 10.43.241.94 left intact
 {"model_name":"sklearn-irisv2","model_version":null,"id":"92932085-22a1-4988-8037-16b036740bbf","parameters":null,"outputs":[{"name":"predict","shape":[2],"datatype":"FP32","parameters":null,"data":[1,2]}]}
+```
