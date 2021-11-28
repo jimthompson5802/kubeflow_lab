@@ -1,6 +1,6 @@
 # Notes
 
-
+## Reproducibility experiment 1
 Created Python program from notebook:
 ```
 jupyter nbconvert --to=script TF_native.ipynb
@@ -153,4 +153,176 @@ False, max diff 0.0001111254096031189
 False, max diff 0.00014284998178482056
 True, max diff 5.21540641784668e-07
 
+```
+
+## Reproducibility Experiment 2
+
+```
+jupyter nbconvert --to=script reproducibility_testbed.ipynb 
+```
+
+
+```
+jovyan@dask-notebook-0:~/kubeflow_lab/notebooks/tensorflow$ python reproducibility_testbed.py
+2021-11-28 17:05:26.310015: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-11-28 17:05:26.310077: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+X shape (10000, 10, 30), y shape (10000,)
+2021-11-28 17:05:29.057196: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2021-11-28 17:05:29.057297: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2021-11-28 17:05:29.057359: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (dask-notebook-0): /proc/driver/nvidia/version does not exist
+2021-11-28 17:05:29.057588: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+Baseline model training
+Epoch 1/5
+79/79 [==============================] - 4s 28ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+
+2-d model training
+Epoch 1/5
+79/79 [==============================] - 5s 33ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+compare baseline model vs 2-d model
+model weights are equal
+
+scikeras model training
+Epoch 1/5
+79/79 [==============================] - 4s 30ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+compare baseline model vs scikeras model
+model weights are equal
+
+
+jovyan@dask-notebook-0:~/kubeflow_lab/notebooks/tensorflow$ python reproducibility_testbed.py
+2021-11-28 17:06:15.616610: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-11-28 17:06:15.616660: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+X shape (10000, 10, 30), y shape (10000,)
+2021-11-28 17:06:17.321299: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2021-11-28 17:06:17.321356: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2021-11-28 17:06:17.321424: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (dask-notebook-0): /proc/driver/nvidia/version does not exist
+2021-11-28 17:06:17.321706: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+Baseline model training
+Epoch 1/5
+79/79 [==============================] - 4s 28ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 30ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+
+2-d model training
+Epoch 1/5
+79/79 [==============================] - 4s 29ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6259 - auc: 0.5411
+compare baseline model vs 2-d model
+model weights are equal
+
+scikeras model training
+Epoch 1/5
+79/79 [==============================] - 4s 29ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+compare baseline model vs scikeras model
+model weights are equal
+
+
+jovyan@dask-notebook-0:~/kubeflow_lab/notebooks/tensorflow$ python reproducibility_testbed.py
+2021-11-28 17:07:05.818906: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-11-28 17:07:05.818958: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+X shape (10000, 10, 30), y shape (10000,)
+2021-11-28 17:07:07.415393: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2021-11-28 17:07:07.415457: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2021-11-28 17:07:07.415509: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (dask-notebook-0): /proc/driver/nvidia/version does not exist
+2021-11-28 17:07:07.415763: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+Baseline model training
+Epoch 1/5
+79/79 [==============================] - 4s 29ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+
+2-d model training
+Epoch 1/5
+79/79 [==============================] - 4s 29ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6392 - auc: 0.5236
+Epoch 4/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+compare baseline model vs 2-d model
+model weights not equal
+Equal False, max diff 0.0006087943911552429
+Equal False, max diff 0.001051638275384903
+Equal False, max diff 0.0004996061325073242
+Equal False, max diff 0.00015875522512942553
+Equal False, max diff 0.0005196661222726107
+Equal False, max diff 7.325410842895508e-05
+Equal False, max diff 2.3186206817626953e-05
+Equal False, max diff 0.0004026312381029129
+Equal False, max diff 5.619227886199951e-05
+Equal False, max diff 8.418411016464233e-05
+Equal False, max diff 3.159046173095703e-06
+
+scikeras model training
+Epoch 1/5
+79/79 [==============================] - 4s 28ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+compare baseline model vs scikeras model
+model weights are equal
 ```
