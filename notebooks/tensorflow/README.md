@@ -326,3 +326,68 @@ Epoch 5/5
 compare baseline model vs scikeras model
 model weights are equal
 ```
+
+Purposely set `tf.random.set_seed()` to a different value for 2-d model.  Epoch metrics different from the other runs.  max absolute difference much larger.
+```
+
+jovyan@dask-notebook-0:~/kubeflow_lab/notebooks/tensorflow$ python reproducibility_testbed.py
+2021-11-28 17:16:24.709634: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-11-28 17:16:24.709721: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+X shape (10000, 10, 30), y shape (10000,)
+2021-11-28 17:16:26.409968: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2021-11-28 17:16:26.410029: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2021-11-28 17:16:26.410086: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (dask-notebook-0): /proc/driver/nvidia/version does not exist
+2021-11-28 17:16:26.410314: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+Baseline model training
+Epoch 1/5
+79/79 [==============================] - 4s 28ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6259 - auc: 0.5411
+
+2-d model training
+Epoch 1/5
+79/79 [==============================] - 4s 28ms/step - loss: 0.7305 - auc: 0.4892
+Epoch 2/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6604 - auc: 0.5062
+Epoch 3/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6485 - auc: 0.5007
+Epoch 4/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6324 - auc: 0.5291
+Epoch 5/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6295 - auc: 0.5269
+compare baseline model vs 2-d model
+model weights not equal
+Equal False, max diff 0.2948779761791229
+Equal False, max diff 0.3463980257511139
+Equal False, max diff 0.0653347373008728
+Equal False, max diff 0.4193931221961975
+Equal False, max diff 0.11848480999469757
+Equal False, max diff 0.07981741428375244
+Equal False, max diff 0.26063647866249084
+Equal False, max diff 0.13439857959747314
+Equal False, max diff 0.025381527841091156
+Equal False, max diff 0.45664751529693604
+Equal False, max diff 0.0018282532691955566
+
+scikeras model training
+Epoch 1/5
+79/79 [==============================] - 4s 29ms/step - loss: 0.7360 - auc: 0.4954
+Epoch 2/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6593 - auc: 0.5064
+Epoch 3/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6392 - auc: 0.5235
+Epoch 4/5
+79/79 [==============================] - 2s 29ms/step - loss: 0.6348 - auc: 0.5230
+Epoch 5/5
+79/79 [==============================] - 2s 28ms/step - loss: 0.6259 - auc: 0.5411
+compare baseline model vs scikeras model
+model weights are equal
+```
