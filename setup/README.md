@@ -2,5 +2,5 @@
 
 ## setup configuration files
 ``` 
-bash ./set_me_up.sh
+./set_me_up.sh
 ```
