@@ -16,19 +16,19 @@ USER 1000
 
 RUN conda install mamba -n base -c conda-forge --yes
 
-RUN PYTHON_VERSION=`python -V | cut -d " " -f 2` \
-  && mamba install --yes python=${PYTHON_VERSION} nomkl \
-    && mamba install --yes \
+RUN mamba install --yes \
     python-blosc \
     cytoolz \
     dask==${DASK_VERSION} \
     dask-ml \
-    dask-kuberenetes \
+    dask-kubernetes \
     python-kubernetes \
     jupyter-server-proxy \
     lz4 \
-    numpy==1.21.1 \
-    pandas==1.3.0 \
+    nomkl \
+    numpy \
+    pandas \
+    tensorflow \
     ipywidgets \
     cachey \
     streamz \
@@ -43,7 +43,7 @@ RUN PYTHON_VERSION=`python -V | cut -d " " -f 2` \
     && (find /opt/conda/lib/python*/site-packages/bokeh/server/static -type f,l -name '*.js' -not -name '*.min.js' -delete || echo "no bokeh static files to cleanup") \
     && rm -rf /opt/conda/pkgs
 
-RUN pip install tensorflow scikeras
+RUN pip install scikeras
 
 WORKDIR /app
 
