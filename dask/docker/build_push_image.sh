@@ -1,8 +1,8 @@
 #!/bin/bash
 
 image_tag=${1:-latest}
-docker_file=${2:-Dockerfile_dask}
-image_repository=${3:-dask_image}
+image_repository=${2:-dask_image}
+docker_file=${3:-Dockerfile_dask}
 progress=${4:-auto}
 
 docker build --progress=${progress} \
