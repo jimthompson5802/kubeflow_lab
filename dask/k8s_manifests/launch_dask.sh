@@ -2,7 +2,7 @@
 
 docker_repository='registry.hub.docker.com'
 dask_image='dsimages/dask_image'
-image_tag='v6'
+image_tag='v7'
 number_workers=3
 
 # launch dask scheduler

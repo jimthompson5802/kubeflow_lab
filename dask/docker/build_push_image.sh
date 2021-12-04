@@ -1,6 +1,6 @@
 #!/bin/bash
 
-image_tag=${1:-latest}
+image_tag=${1:-v7}
 image_repository=${2:-dask_image}
 docker_file=${3:-Dockerfile_dask}
 progress=${4:-auto}
