@@ -3,7 +3,7 @@
 docker_repository='registry.hub.docker.com'
 dask_image='dsimages/dask_image'
 image_tag='v7'
-number_workers=3
+number_workers=2
 
 # launch dask scheduler
 cat <<EOF | kubectl apply -f -
