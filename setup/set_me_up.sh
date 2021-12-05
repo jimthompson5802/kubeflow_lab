@@ -10,3 +10,4 @@ git config credential.helper 'cache --timeout=7200'
 
 # setup bashrc
 cat dot_bashrc >> ~/.bashrc
+chmod 755 ~/.bashrc
