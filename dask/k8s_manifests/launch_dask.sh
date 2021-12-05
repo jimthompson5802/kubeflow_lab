@@ -65,7 +65,7 @@ metadata:
 spec:
   ports:
     - name: dask-scheduler
-      appProtocol: tcp
+#      appProtocol: tcp
       port: 8786
   selector:
     app: dask-scheduler
