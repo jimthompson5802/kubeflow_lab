@@ -1,0 +1,23 @@
+
+# setup command aliases
+alias k='kubectl'
+alias k-aply='kubectl apply'
+alias k-del='kubectl delete'
+alias k-exec='kubectl exec -it'
+alias k-get='kubectl get'
+alias k-get-y='kubectl get -o yaml'
+alias k-get-svc='kubectl get services'
+alias k-get-pod='kubectl get pods'
+alias k-get-pvc='kubectl get pvc'
+alias k-get-pv='kubectl get pv'
+alias k-get-deploy='kubectl get deploy'
+alias k-get-all='kubectl get all'
+alias k-logs='kubectl logs'
+alias k-logs-all='kubectl logs --all-containers'
+alias k-desc='kubectl describe'
+alias k-set-ns='kubectl config set-context --current --namespace'
+alias k-get-ns='kubectl config view --minify | grep namespace:'
+
+alias g='git'
+alias g-s='git status'
+alias g-cmt='git commit --edit'
