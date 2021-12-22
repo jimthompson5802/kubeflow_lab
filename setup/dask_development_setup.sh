@@ -1,3 +1,4 @@
+# set up for dask-kubernetes development
 git clone https://github.com/jimthompson5802/kubeflow_lab \
   && pushd kubeflow_lab/setup \
   && ./set_me_up.sh \
@@ -14,8 +15,11 @@ git clone https://github.com/jimthompson5802/kubeflow_lab \
   && git config credential.helper 'cache --timeout=7200' \
   && popd
 
+# install for dask jupyterlab extension (assume JL 3+)
+pip install dask-labextension
 
-# run this on Mac or notebook server
+
+# helper commands to monitor and clean up dask related objects
 alias clean_dask='kubectl delete pod -l app=dask \
   && kubectl delete svc -l app=dask \
   && kubectl delete envoyfilter -l app=dask'
