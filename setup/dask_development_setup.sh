@@ -20,10 +20,14 @@ pip install dask-labextension
 
 
 # helper commands to monitor and clean up dask related objects
-alias clean_dask='kubectl delete pod -l app=dask \
-  && kubectl delete svc -l app=dask \
-  && kubectl delete envoyfilter -l app=dask'
+alias clean_dask='echo ">>pods:" && kubectl delete pod -l app=dask \
+  && echo -e "\n>>services:" && kubectl delete svc -l app=dask \
+  && echo -e "\n>>envoyfilter:" && kubectl delete envoyfilter -l app=dask \
+  && echo -e "\n>>virtualservice:" && kubectl delete virtualservice -l app=dask'
 
-alias show_dask='kubectl get pod -l app=dask \
-  && kubectl get svc -l app=dask \
-  && kubectl get envoyfilter -l app=dask'
+
+alias show_dask='echo ">>pods:" && kubectl get pod -l app=dask \
+  && echo -e "\n>>services:" && kubectl get svc -l app=dask \
+  && echo -e "\n>>envoyfilter:" && kubectl get envoyfilter -l app=dask \
+  && echo -e "\n>>virtualservice:" && kubectl get virtualservice -l app=dask'
+
